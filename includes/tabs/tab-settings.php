@@ -3,10 +3,13 @@ if( ! is_admin() ) {
 	return;
 }
 
+// Escape the main ASTRO_SB_PREFIX constant
+$astro_sb_prefix = esc_attr(ASTRO_SB_PREFIX);
+
 $tab = 'settings';
-$option_group = ASTRO_SB_PREFIX . $tab;
+$option_group = $astro_sb_prefix . $tab;
 ?>
-<div class="<?php echo ASTRO_SB_PREFIX . 'wrapper'; ?> <?php echo esc_attr( $option_group ); ?>">
+<div class="<?php echo $astro_sb_prefix . 'wrapper'; ?> <?php echo esc_attr( $option_group ); ?>">
 
     <div class="section-wrapper">
         <div class="section-wrapper-inner">
@@ -36,8 +39,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Email', 'astro-sticky-buttons' ),
 						'description' => '',
-						'name' => ASTRO_SB_PREFIX.'email',
-						'value' => get_option(ASTRO_SB_PREFIX.'email'),
+						'name' => $astro_sb_prefix.'email',
+						'value' => get_option($astro_sb_prefix.'email'),
 						'placeholder' => '',
 					);
 					?>
@@ -52,8 +55,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Telephone', 'astro-sticky-buttons' ),
 						'description' => __('Include the country code. Example: +39000123456', 'astro-sticky-buttons' ),
-						'name' => ASTRO_SB_PREFIX.'telephone',
-						'value' => get_option(ASTRO_SB_PREFIX.'telephone'),
+						'name' => $astro_sb_prefix.'telephone',
+						'value' => get_option($astro_sb_prefix.'telephone'),
 						'placeholder' => '',
 					);
 					?>
@@ -68,8 +71,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
                     $field = array(
                         'label' => esc_html__( 'WhatsApp', 'astro-sticky-buttons' ),
                         'description' => __('Include the country code. Example: +39000123456', 'astro-sticky-buttons' ),
-                        'name' => ASTRO_SB_PREFIX.'whatsapp',
-                        'value' => get_option(ASTRO_SB_PREFIX.'whatsapp'),
+                        'name' => $astro_sb_prefix.'whatsapp',
+                        'value' => get_option($astro_sb_prefix.'whatsapp'),
                         'placeholder' => '',
                     );
                     ?>
@@ -84,8 +87,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Skype', 'astro-sticky-buttons' ),
 						'description' => __('Example: name.surname', 'astro-sticky-buttons' ),
-						'name' => ASTRO_SB_PREFIX.'skype',
-						'value' => get_option(ASTRO_SB_PREFIX.'skype'),
+						'name' => $astro_sb_prefix.'skype',
+						'value' => get_option($astro_sb_prefix.'skype'),
 						'placeholder' => '',
 					);
 					?>
@@ -100,8 +103,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Facebook messenger', 'astro-sticky-buttons' ),
 						'description' => __('Example: name.surname', 'astro-sticky-buttons' ),
-						'name' => ASTRO_SB_PREFIX.'facebook_messenger',
-						'value' => get_option(ASTRO_SB_PREFIX.'facebook_messenger'),
+						'name' => $astro_sb_prefix.'facebook_messenger',
+						'value' => get_option($astro_sb_prefix.'facebook_messenger'),
 						'placeholder' => '',
 					);
 					?>
@@ -123,8 +126,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Facebook', 'astro-sticky-buttons' ),
 						'description' => __('Example: your.username', 'astro-sticky-buttons' ),
-						'name' => ASTRO_SB_PREFIX.'facebook',
-						'value' => get_option(ASTRO_SB_PREFIX.'facebook'),
+						'name' => $astro_sb_prefix.'facebook',
+						'value' => get_option($astro_sb_prefix.'facebook'),
 						'placeholder' => '',
 					);
 					?>
@@ -139,8 +142,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Instagram', 'astro-sticky-buttons' ),
 						'description' => __('Example: instagramusername', 'astro-sticky-buttons' ),
-						'name' => ASTRO_SB_PREFIX.'instagram',
-						'value' => get_option(ASTRO_SB_PREFIX.'instagram'),
+						'name' => $astro_sb_prefix.'instagram',
+						'value' => get_option($astro_sb_prefix.'instagram'),
 						'placeholder' => '',
 					);
 					?>
@@ -155,8 +158,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
                     $field = array(
                         'label' => esc_html__( 'YouTube', 'astro-sticky-buttons' ),
                         'description' => __('Example: youryoutubechannel', 'astro-sticky-buttons' ),
-                        'name' => ASTRO_SB_PREFIX.'youtube',
-                        'value' => get_option(ASTRO_SB_PREFIX.'youtube'),
+                        'name' => $astro_sb_prefix.'youtube',
+                        'value' => get_option($astro_sb_prefix.'youtube'),
                         'placeholder' => '',
                     );
                     ?>
@@ -171,8 +174,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'TikTok', 'astro-sticky-buttons' ),
 						'description' => __('Example: @tiktokname', 'astro-sticky-buttons' ),
-						'name' => ASTRO_SB_PREFIX.'tiktok',
-						'value' => get_option(ASTRO_SB_PREFIX.'tiktok'),
+						'name' => $astro_sb_prefix.'tiktok',
+						'value' => get_option($astro_sb_prefix.'tiktok'),
 						'placeholder' => '',
 					);
 					?>
@@ -187,8 +190,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Twitter', 'astro-sticky-buttons' ),
 						'description' => __('Example: twitterusername', 'astro-sticky-buttons' ),
-						'name' => ASTRO_SB_PREFIX.'twitter',
-						'value' => get_option(ASTRO_SB_PREFIX.'twitter'),
+						'name' => $astro_sb_prefix.'twitter',
+						'value' => get_option($astro_sb_prefix.'twitter'),
 						'placeholder' => '',
 					);
 					?>

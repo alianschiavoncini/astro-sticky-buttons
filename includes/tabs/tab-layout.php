@@ -3,10 +3,11 @@ if( ! is_admin() ) {
 	return;
 }
 
+// Escape the main ASTRO_SB_PREFIX constant
+$astro_sb_prefix = esc_attr(ASTRO_SB_PREFIX);
+
 $tab = 'layout';
 $option_group = $astro_sb_prefix . $tab;
-$astro_sb_prefix = esc_attr($astro_sb_prefix);
-$astro_sb_prefix = esc_attr($astro_sb_prefix);
 ?>
 <div class="<?php echo $astro_sb_prefix . 'wrapper'; ?>  <?php echo esc_attr( $option_group ); ?>">
 
