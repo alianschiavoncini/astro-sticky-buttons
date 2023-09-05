@@ -4,9 +4,11 @@ if( ! is_admin() ) {
 }
 
 $tab = 'layout';
-$option_group = ASTRO_SB_PREFIX . $tab;
+$option_group = $astro_sb_prefix . $tab;
+$astro_sb_prefix = esc_attr($astro_sb_prefix);
+$astro_sb_prefix = esc_attr($astro_sb_prefix);
 ?>
-<div class="<?php echo ASTRO_SB_PREFIX . 'wrapper'; ?>  <?php echo esc_attr( $option_group ); ?>">
+<div class="<?php echo $astro_sb_prefix . 'wrapper'; ?>  <?php echo esc_attr( $option_group ); ?>">
 
     <form method="post" action="options.php">
     <?php
@@ -25,8 +27,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Position', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'position',
-						'value' => get_option(ASTRO_SB_PREFIX.'position'),
+						'name' => $astro_sb_prefix.'position',
+						'value' => get_option($astro_sb_prefix.'position'),
 						'placeholder' => false,
 					);
 					?>
@@ -64,8 +66,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
                         <td>
 							<?php
 							$subfield = array(
-								'name' => ASTRO_SB_PREFIX.'icon-margin-top',
-								'value' => get_option(ASTRO_SB_PREFIX.'icon-margin-top'),
+								'name' => $astro_sb_prefix.'icon-margin-top',
+								'value' => get_option($astro_sb_prefix.'icon-margin-top'),
 							);
 							?>
                             <span class="sublabel"><?php esc_html_e('Top', 'astro-sticky-buttons'); ?></span>
@@ -87,8 +89,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
                             </select>
 							<?php
 							$subfield = array(
-								'name' => ASTRO_SB_PREFIX.'icon-margin-right',
-								'value' => get_option(ASTRO_SB_PREFIX.'icon-margin-right'),
+								'name' => $astro_sb_prefix.'icon-margin-right',
+								'value' => get_option($astro_sb_prefix.'icon-margin-right'),
 							);
 							?>
                             <span class="sublabel"><?php esc_html_e('Right', 'astro-sticky-buttons'); ?></span>
@@ -110,8 +112,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
                             </select>
 							<?php
 							$subfield = array(
-								'name' => ASTRO_SB_PREFIX.'icon-margin-bottom',
-								'value' => get_option(ASTRO_SB_PREFIX.'icon-margin-bottom'),
+								'name' => $astro_sb_prefix.'icon-margin-bottom',
+								'value' => get_option($astro_sb_prefix.'icon-margin-bottom'),
 							);
 							?>
                             <span class="sublabel"><?php esc_html_e('Bottom', 'astro-sticky-buttons'); ?></span>
@@ -133,8 +135,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
                             </select>
 							<?php
 							$subfield = array(
-								'name' => ASTRO_SB_PREFIX.'icon-margin-left',
-								'value' => get_option(ASTRO_SB_PREFIX.'icon-margin-left'),
+								'name' => $astro_sb_prefix.'icon-margin-left',
+								'value' => get_option($astro_sb_prefix.'icon-margin-left'),
 							);
 							?>
                             <span class="sublabel"><?php esc_html_e('Left', 'astro-sticky-buttons'); ?></span>
@@ -160,8 +162,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Padding', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'icon-padding',
-						'value' => get_option(ASTRO_SB_PREFIX.'icon-padding'),
+						'name' => $astro_sb_prefix.'icon-padding',
+						'value' => get_option($astro_sb_prefix.'icon-padding'),
 						'placeholder' => false,
 					);
 					?>
@@ -190,8 +192,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Width/Height', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'icon-width',
-						'value' => get_option(ASTRO_SB_PREFIX.'icon-width'),
+						'name' => $astro_sb_prefix.'icon-width',
+						'value' => get_option($astro_sb_prefix.'icon-width'),
 						'placeholder' => false,
 					);
 					?>
@@ -220,8 +222,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Font size', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'icon-font-size',
-						'value' => get_option(ASTRO_SB_PREFIX.'icon-font-size'),
+						'name' => $astro_sb_prefix.'icon-font-size',
+						'value' => get_option($astro_sb_prefix.'icon-font-size'),
 						'placeholder' => false,
 					);
 					?>
@@ -251,8 +253,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Border width', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'icon-border-width',
-						'value' => get_option(ASTRO_SB_PREFIX.'icon-border-width'),
+						'name' => $astro_sb_prefix.'icon-border-width',
+						'value' => get_option($astro_sb_prefix.'icon-border-width'),
 						'placeholder' => false,
 					);
 					?>
@@ -282,8 +284,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Border style', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'icon-border-style',
-						'value' => get_option(ASTRO_SB_PREFIX.'icon-border-style'),
+						'name' => $astro_sb_prefix.'icon-border-style',
+						'value' => get_option($astro_sb_prefix.'icon-border-style'),
 						'placeholder' => false,
 					);
 					?>
@@ -313,8 +315,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Border radius', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'icon-border-radius',
-						'value' => get_option(ASTRO_SB_PREFIX.'icon-border-radius'),
+						'name' => $astro_sb_prefix.'icon-border-radius',
+						'value' => get_option($astro_sb_prefix.'icon-border-radius'),
 						'placeholder' => false,
 					);
 					?>
@@ -344,8 +346,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Box shadow', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'icon-box-shadow',
-						'value' => get_option(ASTRO_SB_PREFIX.'icon-box-shadow'),
+						'name' => $astro_sb_prefix.'icon-box-shadow',
+						'value' => get_option($astro_sb_prefix.'icon-box-shadow'),
 						'placeholder' => false,
 					);
 					?>
@@ -381,8 +383,8 @@ $option_group = ASTRO_SB_PREFIX . $tab;
 					$field = array(
 						'label' => esc_html__( 'Custom CSS', 'astro-sticky-buttons' ),
 						'description' => false,
-						'name' => ASTRO_SB_PREFIX.'custom-css',
-						'value' => get_option(ASTRO_SB_PREFIX.'custom-css'),
+						'name' => $astro_sb_prefix.'custom-css',
+						'value' => get_option($astro_sb_prefix.'custom-css'),
 						'placeholder' => false,
 					);
 					?>
