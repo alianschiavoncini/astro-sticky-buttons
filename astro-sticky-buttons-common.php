@@ -76,7 +76,7 @@ function astro_sb_unregister_option_names() {
 }
 
 /**
- * Return the Astro Booking Engine shortcode.
+ * Return the Astro Sticky Buttons shortcode.
  */
 function astro_sb_shortcode_output() {
 	// Get the Template
