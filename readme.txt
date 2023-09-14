@@ -1,7 +1,7 @@
 === Astro Sticky Buttons ===
 Contributors: alian
 Tags: floating buttons, floating action button, sticky buttons, sticky button, email button, telephone button, whatsapp button, skype button, messenger button,
-Requires at least: 6.0.1
+Requires at least: 5.2
 Tested up to: 6.3.1
 Stable tag:	1.0.0
 Requires PHP: 7.0

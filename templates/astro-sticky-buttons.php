@@ -16,7 +16,7 @@ if ($icon_box_shadow == 'yes' || !$icon_box_shadow) {
 	$twitter = get_option(ASTRO_SB_PREFIX . 'twitter');
 	if (!empty($twitter)) {
 		?>
-        <a href="https://twitter.com/<?php echo esc_attr($twitter); ?>" class="twitter-icon" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://twitter.com/<?php echo esc_attr($twitter); ?>" class="twitter-icon" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
 		<?php
 	}
 
