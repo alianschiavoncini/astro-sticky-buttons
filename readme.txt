@@ -1,9 +1,9 @@
 === Astro Sticky Buttons ===
 Contributors: alian
-Tags: floating buttons, floating action button, sticky buttons, sticky button, email button, telephone button, whatsapp button, skype button, messenger button,
+Tags: floating buttons, floating action button, sticky buttons, sticky button, email button, telephone button, whatsapp button, skype button, messenger button
 Requires at least: 5.2
 Tested up to: 6.3.1
-Stable tag:	1.0.0
+Stable tag:	1.0.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,23 +12,34 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Display your favourite sticky buttons to get in touch with your visitors and share your social channels.
 
 Chat/Communication buttons:
-- Email
-- Telephone
-- WhatsApp
-- Skype
-- Facebook Messenger
+<ul>
+<li>Email</li>
+<li>Telephone</li>
+<li>WhatsApp</li>
+<li>Skype</li>
+<li>Facebook Messenger</li>
+</ul>
 
 Social buttons:
-- Facebook
-- Instagram
-- YouTube
-- TikTok
-- Twitter
+<ul>
+<li>Facebook</li>
+<li>Instagram</li>
+<li>Pinterest</li>
+<li>YouTube</li>
+<li>TikTok</li>
+<li>Twitter</li>
+<li>Vimeo</li>
+</ul>
 
 == Installation ==
 1. Upload the entire `astro-sticky-buttons` folder to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the **Plugins** screen (**Plugins > Installed Plugins**).
 
 == Changelog ==
+= 1.0.1 =
+* Fix TikTok
+* Added Pinterest
+* Added Vimeo
+
 = 1.0.0 =
 * Initial version

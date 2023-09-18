@@ -34,6 +34,13 @@ if ($icon_box_shadow == 'yes' || !$icon_box_shadow) {
     <?php
     }
 
+	$pinterest = get_option(ASTRO_SB_PREFIX . 'pinterest');
+    if (!empty($pinterest)) {
+    ?>
+    <a href="https://www.pinterest.com/<?php echo esc_attr($pinterest); ?>/" class="pinterest-icon" target="_blank"><i class="fa-brands fa-pinterest"></i></a>
+    <?php
+    }
+
 	$youtube = get_option(ASTRO_SB_PREFIX . 'youtube');
     if (!empty($youtube)) {
     ?>
@@ -41,10 +48,17 @@ if ($icon_box_shadow == 'yes' || !$icon_box_shadow) {
     <?php
     }
 
-	$tiktok = get_option(ASTRO_SB_PREFIX . 'youtube');
+	$tiktok = get_option(ASTRO_SB_PREFIX . 'tiktok');
     if (!empty($tiktok)) {
     ?>
     <a href="https://www.tiktok.com/<?php echo esc_attr($tiktok); ?>" class="tiktok-icon" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    <?php
+    }
+
+	$vimeo = get_option(ASTRO_SB_PREFIX . 'vimeo');
+    if (!empty($vimeo)) {
+    ?>
+    <a href="https://vimeo.com/<?php echo esc_attr($vimeo); ?>" class="vimeo-icon" target="_blank"><i class="fa-brands fa-vimeo"></i></a>
     <?php
     }
 

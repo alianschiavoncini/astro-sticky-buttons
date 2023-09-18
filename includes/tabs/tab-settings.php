@@ -154,6 +154,22 @@ $option_group = $astro_sb_prefix . $tab;
 							<?php if ($field['description']) { ?><p class="description"><?php echo esc_html($field['description']); ?></p><?php }?>
                         </td>
                     </tr>
+					<?php
+					$field = array(
+						'label' => esc_html__( 'Pinterest', 'astro-sticky-buttons' ),
+						'description' => __('Example: pinterestusername', 'astro-sticky-buttons' ),
+						'name' => $astro_sb_prefix.'pinterest',
+						'value' => get_option($astro_sb_prefix.'pinterest'),
+						'placeholder' => '',
+					);
+					?>
+                    <tr>
+                        <th scope="row"><label for="<?php echo esc_attr($field['name']); ?>"><?php echo esc_html($field['label']); ?></label></th>
+                        <td>
+                            <input type="text" id="<?php echo esc_attr($field['name']); ?>" name="<?php echo esc_attr($field['name']); ?>" class="regular-text" value="<?php echo esc_attr($field['value']); ?>" placeholder="<?php echo esc_attr($field['placeholder']); ?>">
+							<?php if ($field['description']) { ?><p class="description"><?php echo esc_html($field['description']); ?></p><?php }?>
+                        </td>
+                    </tr>
                     <?php
                     $field = array(
                         'label' => esc_html__( 'YouTube', 'astro-sticky-buttons' ),
@@ -192,6 +208,22 @@ $option_group = $astro_sb_prefix . $tab;
 						'description' => __('Example: twitterusername', 'astro-sticky-buttons' ),
 						'name' => $astro_sb_prefix.'twitter',
 						'value' => get_option($astro_sb_prefix.'twitter'),
+						'placeholder' => '',
+					);
+					?>
+                    <tr>
+                        <th scope="row"><label for="<?php echo esc_attr($field['name']); ?>"><?php echo esc_html($field['label']); ?></label></th>
+                        <td>
+                            <input type="text" id="<?php echo esc_attr($field['name']); ?>" name="<?php echo esc_attr($field['name']); ?>" class="regular-text" value="<?php echo esc_attr($field['value']); ?>" placeholder="<?php echo esc_attr($field['placeholder']); ?>">
+							<?php if ($field['description']) { ?><p class="description"><?php echo esc_html($field['description']); ?></p><?php }?>
+                        </td>
+                    </tr>
+					<?php
+					$field = array(
+						'label' => esc_html__( 'Vimeo', 'astro-sticky-buttons' ),
+						'description' => __('Example: vimeousername', 'astro-sticky-buttons' ),
+						'name' => $astro_sb_prefix.'vimeo',
+						'value' => get_option($astro_sb_prefix.'vimeo'),
 						'placeholder' => '',
 					);
 					?>

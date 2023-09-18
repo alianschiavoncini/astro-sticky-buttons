@@ -36,6 +36,8 @@ function astro_sb_option_names($tab = false) {
 				ASTRO_SB_PREFIX . 'facebook' => ASTRO_SB_PREFIX . 'facebook',
 				ASTRO_SB_PREFIX . 'youtube' => ASTRO_SB_PREFIX . 'youtube',
 				ASTRO_SB_PREFIX . 'tiktok' => ASTRO_SB_PREFIX . 'tiktok',
+				ASTRO_SB_PREFIX . 'vimeo' => ASTRO_SB_PREFIX . 'vimeo',
+				ASTRO_SB_PREFIX . 'pinterest' => ASTRO_SB_PREFIX . 'pinterest',
 			);
 			break;
 
