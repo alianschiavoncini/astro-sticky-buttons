@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Description ==
 Display your favourite sticky buttons to get in touch with your visitors and share your social channels.
 
-Chat/Communication buttons:
+<strong>Chat/Communication buttons:</strong>
 <ul>
 <li>Email</li>
 <li>Telephone</li>
@@ -20,7 +20,7 @@ Chat/Communication buttons:
 <li>Facebook Messenger</li>
 </ul>
 
-Social buttons:
+<strong>Social buttons:</strong>
 <ul>
 <li>Facebook</li>
 <li>Instagram</li>
@@ -29,6 +29,12 @@ Social buttons:
 <li>TikTok</li>
 <li>Twitter</li>
 <li>Vimeo</li>
+</ul>
+
+<strong>Layout:</strong>
+<ul>
+<li>Position: it is possible to choose the position where to display the floating buttons bar: right, bottom-right, bottom, bottom-left, left</li>
+<li>Icons: choose the distance beetween the icons, dimension, border and shape (squared and rounded) and box shadow</li>
 </ul>
 
 == Installation ==
