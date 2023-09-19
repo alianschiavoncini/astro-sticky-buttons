@@ -25,6 +25,20 @@ function astro_sb_option_names($tab = false) {
 
 	switch ($tab) {
 		case 'settings' :
+			$option_names_enable = array();
+
+			$args = array( 'public' => true );
+			$post_types = get_post_types( $args );
+			foreach ($post_types as $post_type) {
+				$option_names_enable[ASTRO_SB_PREFIX . 'enable_' . $post_type] = ASTRO_SB_PREFIX . 'enable_' . $post_type;
+			}
+
+			$args = array( 'public' => true );
+			$taxonomies = get_taxonomies( $args );
+			foreach ($taxonomies as $taxonomy) {
+				$option_names_enable[ASTRO_SB_PREFIX . 'enable_' . $taxonomy] = ASTRO_SB_PREFIX . 'enable_' . $taxonomy;
+			}
+
 			$option_names = array(
 				ASTRO_SB_PREFIX . 'email' => ASTRO_SB_PREFIX . 'email',
 				ASTRO_SB_PREFIX . 'telephone' => ASTRO_SB_PREFIX . 'telephone',
@@ -39,6 +53,8 @@ function astro_sb_option_names($tab = false) {
 				ASTRO_SB_PREFIX . 'vimeo' => ASTRO_SB_PREFIX . 'vimeo',
 				ASTRO_SB_PREFIX . 'pinterest' => ASTRO_SB_PREFIX . 'pinterest',
 			);
+
+			$option_names = array_merge($option_names_enable, $option_names);
 			break;
 
 		case 'layout' :
@@ -81,6 +97,7 @@ function astro_sb_unregister_option_names() {
  * Return the Astro Sticky Buttons shortcode.
  */
 function astro_sb_shortcode_output() {
+
 	// Get the Template
 	$template_file = plugin_dir_path(__FILE__) . 'templates/astro-sticky-buttons.php';
 	if (file_exists($template_file)) { // Check if the template file exists.
@@ -174,3 +191,42 @@ function astro_sb_get_custom_layout() {
 
 	return $str;
 }
+
+/**
+ * Check the current page/post type.
+ */
+function astro_sb_get_current_post_type() {
+	global $post;
+
+	//Default value
+	$enable = false;
+
+	if ( is_singular() || is_single() || is_page() ) {
+		$option_value = get_option('astro_sb_enable_' . $post->post_type);
+		if ($option_value == 1) {
+			$enable = true;
+		}
+	}
+
+	if ( is_category() || is_tax() || is_tag() ) {
+		$obj = get_queried_object();
+		if ($obj) {
+			$term_taxonomy = $obj->taxonomy;
+			$option_value = get_option('astro_sb_enable_' . $term_taxonomy);
+			if ($option_value == 1) {
+				$enable = true;
+			}
+		}
+	}
+
+	if ( is_archive() ) {
+		$enable = true;
+	}
+
+	if ($enable) {
+		echo astro_sb_shortcode_output();
+	}else{
+		return false;
+	}
+}
+add_action('wp_footer', 'astro_sb_get_current_post_type');

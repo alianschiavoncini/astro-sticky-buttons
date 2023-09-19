@@ -11,15 +11,6 @@ $option_group = $astro_sb_prefix . $tab;
 ?>
 <div class="<?php echo $astro_sb_prefix . 'wrapper'; ?> <?php echo esc_attr( $option_group ); ?>">
 
-    <div class="section-wrapper">
-        <div class="section-wrapper-inner">
-            <h2 id="settings" class="title"><?php _e('Settings', 'astro-sticky-buttons' ); ?></h2>
-            <p><?php echo esc_html('Astro Sticky Buttons displays the sticky buttons using the shortcode:', 'astro-sticky-buttons'); ?> <strong>[astro-sticky-buttons]</strong><br>
-                <?php echo esc_html('To display the sticky buttons on all pages of the site, it is recommended to insert the shortcode in the header or footer of the site.', 'astro-sticky-buttons'); ?><br>
-                <?php echo esc_html('The shortcode can also be inserted via text widget.', 'astro-sticky-buttons'); ?></p>
-        </div>
-    </div>
-
     <form method="post" action="options.php" class="<?php echo esc_attr($option_group); ?>_form">
         <?php
         settings_fields($option_group);
@@ -29,11 +20,101 @@ $option_group = $astro_sb_prefix . $tab;
         <div class="section-wrapper">
             <div class="section-wrapper-inner">
 
-                <h2 id="buttons" class="title"><?php _e('Buttons', 'astro-sticky-buttons' ); ?></h2>
+                <p><?php echo esc_html('The sticky buttons can be displayed in two different methods:', 'astro-sticky-buttons'); ?>
+                <ol>
+                    <li><?php echo esc_html('Choose where to display the sticky buttons', 'astro-sticky-buttons'); ?> (<strong><?php echo esc_html('recommended', 'astro-sticky-buttons'); ?></strong>)</li>
+                    <li><?php echo esc_html('Using the shortcode [astro-sticky-buttons] in your website content/widget/header/footer', 'astro-sticky-buttons'); ?></li>
+                </ol>
+                <p><strong><?php echo esc_html('It is recommended to use only one method!', 'astro-sticky-buttons'); ?></strong>
 
                 <hr>
 
-                <h3 id="buttons-communication" class="title"><?php _e('Chat/Communication', 'astro-sticky-buttons' ); ?></h3>
+                <h2 id="where-display" class="title"><?php _e('Choose where to display the Astro Sticky Buttons', 'astro-sticky-buttons' ); ?></h2>
+                <table class="form-table astro_sb_enable_disable_post_types">
+					<?php
+					$field_label = esc_html__( 'Check/Uncheck All', 'astro-sticky-buttons' );
+					$field_description = '';
+					$field_name = $astro_sb_prefix.'enable_disable_all';
+					$field_value = 1;
+					?>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>
+                            <input id="<?php echo esc_attr($field_name); ?>"
+                                   name="<?php echo esc_attr($field_name); ?>"
+                                   type="checkbox"
+                                   class="<?php echo esc_attr($astro_sb_prefix) . 'checkbox_enable'; ?>"
+
+                            ><label for="<?php echo esc_attr($field_name); ?>"><?php echo esc_html($field_label); ?></label>
+                        </td>
+                    </tr>
+
+					<?php
+					// Posts
+					$args = array( 'public' => true );
+					$post_types = get_post_types( $args );
+
+					foreach ( $post_types  as $post_type ) {
+						$post_type = get_post_type_object($post_type);
+
+						$field_label = esc_html__( 'Display in ' . $post_type->labels->name, 'astro-sticky-buttons' );
+						$field_description = '';
+						$field_name = $astro_sb_prefix.'enable_'.$post_type->name;
+						$field_value = get_option($field_name);
+						?>
+                        <tr>
+                            <th scope="row"><label for="<?php echo esc_attr($field_name); ?>"><?php echo esc_html($field_label); ?></label></th>
+                            <td>
+                                <fieldset>
+                                    <legend class="screen-reader-text"><span><?php echo esc_html($field_label); ?></span></legend>
+                                    <label for="<?php echo esc_attr($field_name); ?>"><input id="<?php echo esc_attr($field_name); ?>"
+                                                                                             name="<?php echo esc_attr($field_name); ?>"
+                                                                                             type="checkbox"
+                                                                                             class="<?php echo esc_attr($astro_sb_prefix) . 'checkbox_enable'; ?>"
+                                                                                             value="1" <?php if ($field_value == "1") {
+											echo 'checked="checked"';
+										} ?>><?php echo esc_html($field_description); ?></label>
+                                </fieldset>
+                            </td>
+                        </tr>
+						<?php
+					}
+
+                    // Taxonomies
+					$args = array( 'public' => true );
+					$taxonomies = get_taxonomies( $args );
+
+					foreach ( $taxonomies  as $taxonomy ) {
+						$taxonomy = get_taxonomy($taxonomy);
+
+						$field_label = esc_html__( 'Display in ' . $taxonomy->labels->name, 'astro-sticky-buttons' );
+						$field_description = '';
+						$field_name = $astro_sb_prefix.'enable_'.$taxonomy->name;
+						$field_value = get_option($field_name);
+						?>
+                        <tr>
+                            <th scope="row"><label for="<?php echo esc_attr($field_name); ?>"><?php echo esc_html($field_label); ?></label></th>
+                            <td>
+                                <fieldset>
+                                    <legend class="screen-reader-text"><span><?php echo esc_html($field_label); ?></span></legend>
+                                    <label for="<?php echo esc_attr($field_name); ?>"><input id="<?php echo esc_attr($field_name); ?>"
+                                                                                             name="<?php echo esc_attr($field_name); ?>"
+                                                                                             type="checkbox"
+                                                                                             class="<?php echo esc_attr($astro_sb_prefix) . 'checkbox_enable'; ?>"
+                                                                                             value="1" <?php if ($field_value == "1") {
+											echo 'checked="checked"';
+										} ?>><?php echo esc_html($field_description); ?></label>
+                                </fieldset>
+                            </td>
+                        </tr>
+						<?php
+					}
+					?>
+                </table>
+
+                <hr>
+
+                <h2 id="buttons-communication" class="title"><?php _e('Chat/Communication buttons', 'astro-sticky-buttons' ); ?></h2>
                 <table class="form-table">
 					<?php
 					$field = array(
@@ -119,7 +200,7 @@ $option_group = $astro_sb_prefix . $tab;
 
                 <hr>
 
-                <h3 id="buttons-communication" class="title"><?php _e('Social', 'astro-sticky-buttons' ); ?></h3>
+                <h2 id="buttons-communication" class="title"><?php _e('Social buttons', 'astro-sticky-buttons' ); ?></h2>
                 <table class="form-table">
 
 					<?php
