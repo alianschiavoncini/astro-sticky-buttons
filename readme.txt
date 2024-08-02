@@ -1,12 +1,14 @@
 === Astro Sticky Buttons ===
 Contributors: alian
-Tags: floating buttons, floating action button, sticky buttons, sticky button, email button, telephone button, whatsapp button, skype button, messenger button
+Tags: floating buttons, sticky buttons, email button, telephone button, whatsapp button
 Requires at least: 5.2
-Tested up to: 6.3.1
-Stable tag:	1.1.0
-Requires PHP: 7.0
+Tested up to: 6.6.1
+Stable tag:	1.2.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Add sticky buttons for easy contact and social sharing on your site. Supports email, phone, WhatsApp, Skype, Facebook, Instagram, and more.
 
 == Description ==
 Display your favourite sticky buttons to get in touch with your visitors and share your social channels.
@@ -42,6 +44,10 @@ Display your favourite sticky buttons to get in touch with your visitors and sha
 1. Activate the plugin through the **Plugins** screen (**Plugins > Installed Plugins**).
 
 == Changelog ==
+= 1.2.0 =
+* Added full compatibility with WordPress version 6.6.1.
+* Added security checks to the code
+
 = 1.1.0 =
 * Added new settings: it is possible to choose which post type or taxonomy as well as custom post type and custom taxonomy to display the sticky buttons bar (recommended method). Don't need to use the shortcode [astro-sticky-buttons] to display the sticky buttons bar.
 

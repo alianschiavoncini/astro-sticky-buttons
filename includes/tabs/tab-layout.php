@@ -58,6 +58,7 @@ $option_group = $astro_sb_prefix . $tab;
                 <table class="form-table">
 					<?php
 					$field = array(
+						'name' => $astro_sb_prefix.'icon-margin',
 						'label' => esc_html__( 'Margin', 'astro-sticky-buttons' ),
 						'description' => false,
 					);
@@ -83,7 +84,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -106,7 +107,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -129,7 +130,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -152,7 +153,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php _e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -182,7 +183,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php _e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -212,7 +213,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php _e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -232,7 +233,7 @@ $option_group = $astro_sb_prefix . $tab;
                         <th scope="row"><label for="<?php echo esc_attr($field['name']); ?>"><?php echo esc_html($field['label']); ?></label></th>
                         <td>
                             <select name="<?php echo esc_attr($field['name']); ?>" id="<?php echo esc_attr($field['name']); ?>">
-                                <option value=""><?php _e( 'inherit', 'astro-sticky-buttons' ); ?></option>
+                                <option value=""><?php esc_html_e( 'inherit', 'astro-sticky-buttons' ); ?></option>
 								<?php
 								if (!($field['value'])) {
 									$field['value'] = '';
@@ -243,7 +244,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php _e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -263,7 +264,7 @@ $option_group = $astro_sb_prefix . $tab;
                         <th scope="row"><label for="<?php echo esc_attr($field['name']); ?>"><?php echo esc_html($field['label']); ?></label></th>
                         <td>
                             <select name="<?php echo esc_attr($field['name']); ?>" id="<?php echo esc_attr($field['name']); ?>">
-                                <option value=""><?php _e( 'inherit', 'astro-sticky-buttons' ); ?></option>
+                                <option value=""><?php esc_html_e( 'inherit', 'astro-sticky-buttons' ); ?></option>
 								<?php
 								if (!($field['value'])) {
 									$field['value'] = 0;
@@ -274,7 +275,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php _e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
 									<?php
 								}
 								?>
@@ -305,7 +306,7 @@ $option_group = $astro_sb_prefix . $tab;
 									$selected = ' selected="selected"';
 								}
                             ?>
-                                <option value="<?php echo esc_attr($border_style); ?>"<?php echo $selected; ?>><?php echo esc_attr($border_style); ?></option>
+                                <option value="<?php echo esc_attr($border_style); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($border_style); ?></option>
                             <?php
                             }
                             ?>
@@ -325,7 +326,7 @@ $option_group = $astro_sb_prefix . $tab;
                         <th scope="row"><label for="<?php echo esc_attr($field['name']); ?>"><?php echo esc_html($field['label']); ?></label></th>
                         <td>
                             <select name="<?php echo esc_attr($field['name']); ?>" id="<?php echo esc_attr($field['name']); ?>">
-                                <option value=""><?php _e( 'inherit', 'astro-sticky-buttons' ); ?></option>
+                                <option value=""><?php esc_html_e( 'inherit', 'astro-sticky-buttons' ); ?></option>
                                 <?php
                                 if (!($field['value'])) {
                                     $field['value'] = 100;
@@ -336,7 +337,7 @@ $option_group = $astro_sb_prefix . $tab;
                                         $selected = ' selected="selected"';
                                     }
                                     ?>
-                                    <option value="<?php echo esc_attr($i); ?>"<?php echo $selected; ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php _e( 'px', 'astro-sticky-buttons' ); ?></span></option>
+                                    <option value="<?php echo esc_attr($i); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($i); ?> <span class="select-option-suffix-px"><?php esc_html_e( 'px', 'astro-sticky-buttons' ); ?></span></option>
                                     <?php
                                 }
                                 ?>
@@ -367,7 +368,7 @@ $option_group = $astro_sb_prefix . $tab;
 										$selected = ' selected="selected"';
 									}
 									?>
-                                    <option value="<?php echo esc_attr($box_shadow); ?>"<?php echo $selected; ?>><?php echo esc_attr($box_shadow); ?></option>
+                                    <option value="<?php echo esc_attr($box_shadow); ?>"<?php echo esc_attr($selected); ?>><?php echo esc_attr($box_shadow); ?></option>
 									<?php
 								}
 								?>

@@ -29,7 +29,7 @@ $option_group = $astro_sb_prefix . $tab;
 
                 <hr>
 
-                <h2 id="where-display" class="title"><?php _e('Choose where to display the Astro Sticky Buttons', 'astro-sticky-buttons' ); ?></h2>
+                <h2 id="where-display" class="title"><?php esc_html_e('Choose where to display the Astro Sticky Buttons', 'astro-sticky-buttons' ); ?></h2>
                 <table class="form-table astro_sb_enable_disable_post_types">
 					<?php
 					$field_label = esc_html__( 'Check/Uncheck All', 'astro-sticky-buttons' );
@@ -57,7 +57,7 @@ $option_group = $astro_sb_prefix . $tab;
 					foreach ( $post_types  as $post_type ) {
 						$post_type = get_post_type_object($post_type);
 
-						$field_label = esc_html__( 'Display in ' . $post_type->labels->name, 'astro-sticky-buttons' );
+						$field_label = sprintf( esc_html__( 'Display in %s', 'astro-sticky-buttons' ), $post_type->labels->name );
 						$field_description = '';
 						$field_name = $astro_sb_prefix.'enable_'.$post_type->name;
 						$field_value = get_option($field_name);
@@ -87,7 +87,7 @@ $option_group = $astro_sb_prefix . $tab;
 					foreach ( $taxonomies  as $taxonomy ) {
 						$taxonomy = get_taxonomy($taxonomy);
 
-						$field_label = esc_html__( 'Display in ' . $taxonomy->labels->name, 'astro-sticky-buttons' );
+						$field_label = sprintf( esc_html__( 'Display in %s', 'astro-sticky-buttons' ), $taxonomy->labels->name );
 						$field_description = '';
 						$field_name = $astro_sb_prefix.'enable_'.$taxonomy->name;
 						$field_value = get_option($field_name);
@@ -114,7 +114,7 @@ $option_group = $astro_sb_prefix . $tab;
 
                 <hr>
 
-                <h2 id="buttons-communication" class="title"><?php _e('Chat/Communication buttons', 'astro-sticky-buttons' ); ?></h2>
+                <h2 id="buttons-communication" class="title"><?php esc_html_e('Chat/Communication buttons', 'astro-sticky-buttons' ); ?></h2>
                 <table class="form-table">
 					<?php
 					$field = array(
@@ -200,7 +200,7 @@ $option_group = $astro_sb_prefix . $tab;
 
                 <hr>
 
-                <h2 id="buttons-communication" class="title"><?php _e('Social buttons', 'astro-sticky-buttons' ); ?></h2>
+                <h2 id="buttons-communication" class="title"><?php esc_html_e('Social buttons', 'astro-sticky-buttons' ); ?></h2>
                 <table class="form-table">
 
 					<?php

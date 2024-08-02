@@ -55,7 +55,6 @@ add_action( 'admin_enqueue_scripts', 'astro_sb_load_admin_files' );
  */
 function astro_sb_register_settings() {
 
-
     if (isset($_REQUEST['option_page']) && !empty($_REQUEST['option_page'])) {
 
 		if (strpos($_REQUEST['option_page'], ASTRO_SB_PREFIX) === 0) {
@@ -139,12 +138,12 @@ if (class_exists('Astro_Plugin_Panel')) {
  */
 function astro_sb_options() {
     if ( !current_user_can( 'manage_options' ) )  {
-        wp_die( __( 'You do not have sufficient permissions to access this page.', 'astro-sticky-buttons' ) );
+        wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'astro-sticky-buttons' ) );
     }
 
     ?>
     <div class="wrap">
-        <h1><?php echo astro_sb_plugin_data('Name'); ?></h1>
+        <h1><?php echo esc_html(astro_sb_plugin_data('Name')); ?></h1>
         <?php
 
         $tab  = 'settings'; // default panel

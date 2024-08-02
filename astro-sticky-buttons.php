@@ -3,9 +3,9 @@
  * Plugin Name:       Astro Sticky Buttons
  * Plugin URI:        https://wordpress.org/plugins/astro-sticky-buttons
  * Description:       Display your favourite sticky buttons to get in touch with your visitors and share your social channels.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Requires PHP:      7.4
  * Author:            AstroThemes
  * Author URI:        https://www.astrothemes.com
  * License:           GPL v2 or later
