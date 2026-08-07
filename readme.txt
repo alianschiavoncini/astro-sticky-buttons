@@ -2,8 +2,8 @@
 Contributors: alian
 Tags: floating buttons, sticky buttons, email button, telephone button, whatsapp button
 Requires at least: 5.2
-Tested up to: 6.6.1
-Stable tag:	1.2.0
+Tested up to: 7.0
+Stable tag: 1.4.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,7 +43,23 @@ Display your favourite sticky buttons to get in touch with your visitors and sha
 1. Upload the entire `astro-sticky-buttons` folder to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the **Plugins** screen (**Plugins > Installed Plugins**).
 
+== Wordefence vendor verification key ==
+gsphudo7by90lzwdlihyerqxbzj6jiln
+
 == Changelog ==
+= 1.4.0 =
+* Accessibility: added accessible names (aria-label) to all sticky buttons and marked the decorative icons as aria-hidden. Fixes WCAG 2.4.4 / 4.1.2 (link-name). Thanks to Antonio Trifirò (@conlaccento).
+* Added: languages/astro-sticky-buttons.pot, so the plugin strings can be translated.
+* Fixed: replaced str_contains() with strpos() in the settings screen. str_contains() is only available from WordPress 5.9 (or PHP 8.0), while this plugin supports WordPress 5.2 with PHP 7.4: on older installations opening a settings tab raised a fatal error.
+* Changed: the plugin author is now Alian Schiavoncini (https://www.alian.it) and the support address is alian@alian.it. The previous AstroThemes website and email address are no longer active.
+* Changed: the admin menu is now named "Astro Plugins" instead of "AstroThemes".
+* Changed: the plugin version is now stored in the ASTRO_SB_VERSION constant instead of being read at runtime with get_plugin_data().
+* Compatibility: tested with WordPress 7.0.
+
+= 1.3.0 =
+* Checked full compatibility with WordPress version 6.8.3
+* Added Wordefence vendor verification key
+
 = 1.2.0 =
 * Added full compatibility with WordPress version 6.6.1.
 * Added security checks to the code

@@ -1,0 +1,347 @@
+# Copyright (C) 2026 Alian Schiavoncini
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Astro Sticky Buttons 1.4.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astro-sticky-buttons\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-07T16:43:59+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: astro-sticky-buttons\n"
+
+#. Plugin Name of the plugin
+#: astro-sticky-buttons.php
+msgid "Astro Sticky Buttons"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: astro-sticky-buttons.php
+msgid "https://wordpress.org/plugins/astro-sticky-buttons"
+msgstr ""
+
+#. Description of the plugin
+#: astro-sticky-buttons.php
+msgid "Display your favourite sticky buttons to get in touch with your visitors and share your social channels."
+msgstr ""
+
+#. Author of the plugin
+#: astro-sticky-buttons.php
+msgid "Alian Schiavoncini"
+msgstr ""
+
+#. Author URI of the plugin
+#: astro-sticky-buttons.php
+msgid "https://www.alian.it"
+msgstr ""
+
+#: astro-sticky-buttons-admin.php:39
+msgid "Clear"
+msgstr ""
+
+#: astro-sticky-buttons-admin.php:40
+msgid "Default"
+msgstr ""
+
+#: astro-sticky-buttons-admin.php:41
+msgid "Select Color"
+msgstr ""
+
+#: astro-sticky-buttons-admin.php:42
+msgid "Current Color"
+msgstr ""
+
+#: astro-sticky-buttons-admin.php:126
+#: astro-sticky-buttons-admin.php:127
+msgid "Sticky buttons"
+msgstr ""
+
+#: astro-sticky-buttons-admin.php:141
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: astro-sticky-buttons.php:88
+#: includes/tabs/tabs-nav.php:16
+msgid "Settings"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:23
+#: includes/tabs/tabs-nav.php:21
+msgid "Layout"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:25
+#: includes/tabs/tab-layout.php:29
+msgid "Position"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:45
+msgid "right"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:46
+msgid "bottom-right"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:47
+msgid "bottom"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:48
+msgid "bottom-left"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:49
+msgid "left"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:57
+msgid "Icons"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:62
+msgid "Margin"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:75
+msgid "Top"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:87
+#: includes/tabs/tab-layout.php:110
+#: includes/tabs/tab-layout.php:133
+#: includes/tabs/tab-layout.php:156
+#: includes/tabs/tab-layout.php:186
+#: includes/tabs/tab-layout.php:216
+#: includes/tabs/tab-layout.php:247
+#: includes/tabs/tab-layout.php:278
+#: includes/tabs/tab-layout.php:340
+msgid "px"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:98
+msgid "Right"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:121
+msgid "Bottom"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:144
+msgid "Left"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:165
+msgid "Padding"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:195
+msgid "Width/Height"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:225
+msgid "Font size"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:236
+#: includes/tabs/tab-layout.php:267
+#: includes/tabs/tab-layout.php:329
+msgid "inherit"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:256
+msgid "Border width"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:287
+msgid "Border style"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:318
+msgid "Border radius"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:349
+msgid "Box shadow"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:382
+msgid "Advanced settings"
+msgstr ""
+
+#: includes/tabs/tab-layout.php:386
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:32
+msgid "Choose where to display the Astro Sticky Buttons"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:35
+msgid "Check/Uncheck All"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:60
+#: includes/tabs/tab-settings.php:90
+#, php-format
+msgid "Display in %s"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:117
+msgid "Chat/Communication buttons"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:121
+msgid "Email"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:137
+msgid "Telephone"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:138
+#: includes/tabs/tab-settings.php:154
+msgid "Include the country code. Example: +39000123456"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:153
+#: templates/astro-sticky-buttons.php:68
+msgid "WhatsApp"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:169
+#: templates/astro-sticky-buttons.php:82
+msgid "Skype"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:170
+#: includes/tabs/tab-settings.php:186
+msgid "Example: name.surname"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:185
+msgid "Facebook messenger"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:203
+msgid "Social buttons"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:208
+#: templates/astro-sticky-buttons.php:26
+msgid "Facebook"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:209
+msgid "Example: your.username"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:224
+#: templates/astro-sticky-buttons.php:33
+msgid "Instagram"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:225
+msgid "Example: instagramusername"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:240
+#: templates/astro-sticky-buttons.php:40
+msgid "Pinterest"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:241
+msgid "Example: pinterestusername"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:256
+#: templates/astro-sticky-buttons.php:47
+msgid "YouTube"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:257
+msgid "Example: youryoutubechannel"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:272
+#: templates/astro-sticky-buttons.php:54
+msgid "TikTok"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:273
+msgid "Example: @tiktokname"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:288
+msgid "Twitter"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:289
+msgid "Example: twitterusername"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:304
+#: templates/astro-sticky-buttons.php:61
+msgid "Vimeo"
+msgstr ""
+
+#: includes/tabs/tab-settings.php:305
+msgid "Example: vimeousername"
+msgstr ""
+
+#: includes/tabs/tab-support.php:20
+msgid "All the plugin options have deleted."
+msgstr ""
+
+#: includes/tabs/tab-support.php:47
+#: includes/tabs/tabs-nav.php:26
+msgid "Support"
+msgstr ""
+
+#: includes/tabs/tab-support.php:49
+msgid "FAQs"
+msgstr ""
+
+#: includes/tabs/tab-support.php:50
+msgid "Do you need support?"
+msgstr ""
+
+#: includes/tabs/tab-support.php:51
+msgid "Request support at the "
+msgstr ""
+
+#: includes/tabs/tab-support.php:51
+msgid "plugin support page"
+msgstr ""
+
+#: includes/tabs/tab-support.php:51
+msgid "or write me an email to"
+msgstr ""
+
+#: includes/tabs/tab-support.php:55
+msgid "Plugin data reset"
+msgstr ""
+
+#: includes/tabs/tab-support.php:56
+msgid "Remove all plugin settings"
+msgstr ""
+
+#: templates/astro-sticky-buttons.php:19
+msgid "X (Twitter)"
+msgstr ""
+
+#: templates/astro-sticky-buttons.php:75
+msgid "Facebook Messenger"
+msgstr ""
+
+#: templates/astro-sticky-buttons.php:89
+msgid "Call us"
+msgstr ""
+
+#: templates/astro-sticky-buttons.php:96
+msgid "Email us"
+msgstr ""

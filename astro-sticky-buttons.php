@@ -3,11 +3,11 @@
  * Plugin Name:       Astro Sticky Buttons
  * Plugin URI:        https://wordpress.org/plugins/astro-sticky-buttons
  * Description:       Display your favourite sticky buttons to get in touch with your visitors and share your social channels.
- * Version:           1.2.0
+ * Version:           1.4.0
  * Requires at least: 5.2
  * Requires PHP:      7.4
- * Author:            AstroThemes
- * Author URI:        https://www.astrothemes.com
+ * Author:            Alian Schiavoncini
+ * Author URI:        https://www.alian.it
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       astro-sticky-buttons
@@ -35,6 +35,7 @@ if ( is_admin() ) {
 /**
  * Plugin constants.
  */
+define('ASTRO_SB_VERSION', '1.4.0');
 define('ASTRO_SB_PREFIX', 'astro_sb_');
 define('ASTRO_SB_TEXTDOMAIN', astro_sb_plugin_data('TextDomain'));
 
@@ -52,7 +53,7 @@ function astro_sb_load_textdomain() {
 add_action('init', 'astro_sb_enqueue_files');
 function astro_sb_enqueue_files() {
 
-	$plugin_version = astro_sb_plugin_data('Version');
+	$plugin_version = ASTRO_SB_VERSION;
 
 	// Enqueue Font Awesome
 	$fontawesome_css_url = plugin_dir_url( __FILE__ ) . 'vendors/fontawesome/css/fontawesome.min.css';
@@ -94,7 +95,7 @@ function astro_sb_add_plugin_page_settings_link( $links ) {
  */
 register_activation_hook( __FILE__, 'astro_sb_check_plugin_version' );
 function astro_sb_check_plugin_version() {
-	$plugin_version = astro_sb_plugin_data('Version');
+	$plugin_version = ASTRO_SB_VERSION;
 	if ($plugin_version < '1.0.2') {
 		if (!isset($astro_sb_enable_all)) {
 			add_option('astro_sb_enable_post', 1);

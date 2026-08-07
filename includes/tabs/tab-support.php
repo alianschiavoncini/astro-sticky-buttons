@@ -48,7 +48,7 @@ do_settings_sections($option_group);
 
             <h3 id="support-faqs" class="title"><?php esc_html_e( 'FAQs', 'astro-sticky-buttons' ); ?></h3>
             <p><span class="support-faq-question"><?php esc_html_e( 'Do you need support?', 'astro-sticky-buttons' ); ?></span><br>
-                <span class="support-faq-answer"><?php esc_html_e( 'Request support at the ', 'astro-sticky-buttons' ); ?> <a href="https://wordpress.org/support/plugin/astro-sticky-buttons/" target="_blank"><?php esc_html_e( 'plugin support page', 'astro-sticky-buttons' ); ?></a> <?php esc_html_e( 'or write me an email to', 'astro-sticky-buttons' ); ?> <a href="mailto:info@astrothemes.com">info@astrothemes.com</a>.</span></p>
+                <span class="support-faq-answer"><?php esc_html_e( 'Request support at the ', 'astro-sticky-buttons' ); ?> <a href="https://wordpress.org/support/plugin/astro-sticky-buttons/" target="_blank"><?php esc_html_e( 'plugin support page', 'astro-sticky-buttons' ); ?></a> <?php esc_html_e( 'or write me an email to', 'astro-sticky-buttons' ); ?> <a href="mailto:alian@alian.it">alian@alian.it</a>.</span></p>
 
             <hr />
 

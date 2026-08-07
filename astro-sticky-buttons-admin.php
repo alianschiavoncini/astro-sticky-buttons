@@ -149,7 +149,11 @@ function astro_sb_options() {
         $tab  = 'settings'; // default panel
         if (isset($_REQUEST['tab']) && !empty($_REQUEST['tab'])) {
 			$tab  = sanitize_text_field($_REQUEST['tab']);
-            if (str_contains('-',$tab)) {
+            // strpos() invece di str_contains(): quest'ultima e disponibile solo da
+            // WordPress 5.9 (polyfill) o PHP 8.0, mentre il plugin dichiara di supportare
+            // WordPress 5.2 con PHP 7.4. Gli argomenti restano nell'ordine originale per
+            // non alterare il comportamento esistente.
+            if (strpos('-', $tab) !== false) {
 				$tab = explode('-', $tab);
 				$tab = end($tab);
 			}
