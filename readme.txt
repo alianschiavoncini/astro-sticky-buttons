@@ -2,8 +2,8 @@
 Contributors: alian
 Tags: floating buttons, sticky buttons, email button, telephone button, whatsapp button
 Requires at least: 5.2
-Tested up to: 7.0
-Stable tag: 1.4.0
+Tested up to: 7.1
+Stable tag: 1.4.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,6 +47,9 @@ Display your favourite sticky buttons to get in touch with your visitors and sha
 gsphudo7by90lzwdlihyerqxbzj6jiln
 
 == Changelog ==
+= 1.4.1 =
+* Compatibility: tested with WordPress 7.1.
+
 = 1.4.0 =
 * Accessibility: added accessible names (aria-label) to all sticky buttons and marked the decorative icons as aria-hidden. Fixes WCAG 2.4.4 / 4.1.2 (link-name). Thanks to Antonio Trifirò (@conlaccento).
 * Added: languages/astro-sticky-buttons.pot, so the plugin strings can be translated.
