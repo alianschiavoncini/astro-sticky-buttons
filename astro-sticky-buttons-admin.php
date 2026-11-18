@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if( ! is_admin() ) {
 	return;
 }
@@ -14,34 +18,14 @@ function astro_sb_load_admin_files() {
 	 */
 	wp_enqueue_style ( 'astro-sticky-buttons-admin-styles', plugins_url('/css/astro-sticky-buttons-admin.css', __FILE__), array(), astro_sb_plugin_data('Version') );
 
-	wp_register_script( 'astro-sticky-buttons-admin-scripts', plugins_url('/js/astro-sticky-buttons-admin.js', __FILE__), array('jquery'), astro_sb_plugin_data('Version'), true );
+	wp_register_script( 'astro-sticky-buttons-admin-scripts', plugins_url('/js/astro-sticky-buttons-admin.js', __FILE__), array( 'jquery', 'wp-color-picker' ), astro_sb_plugin_data('Version'), true );
 	wp_enqueue_script( 'astro-sticky-buttons-admin-scripts' );
 
 	/**
-	 * Include WP Iris color picker.
+	 * WP color picker: the scripts registered by the core (with Iris and their translations).
 	 */
 	wp_enqueue_style( 'wp-color-picker' );
-	wp_enqueue_script(
-		'iris',
-		admin_url( 'js/iris.min.js' ),
-		array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ),
-		false,
-		1
-	);
-	wp_enqueue_script(
-		'wp-color-picker',
-		admin_url( 'js/color-picker.min.js' ),
-		array( 'iris' ),
-		false,
-		1
-	);
-	$colorpicker_l10n = array(
-		'clear' => __( 'Clear', 'astro-sticky-buttons' ),
-		'defaultString' => __( 'Default', 'astro-sticky-buttons' ),
-		'pick' => __( 'Select Color', 'astro-sticky-buttons' ),
-		'current' => __( 'Current Color', 'astro-sticky-buttons' ),
-	);
-	wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', $colorpicker_l10n );
+	wp_enqueue_script( 'wp-color-picker' );
 
 	/**
      * Include the plugin navigation.
@@ -51,64 +35,73 @@ function astro_sb_load_admin_files() {
 add_action( 'admin_enqueue_scripts', 'astro_sb_load_admin_files' );
 
 /**
+ * Remove all the plugin settings (Support tab). The request is a POST to admin-post.php with a
+ * nonce and the manage_options capability, followed by a redirect: reloading the page or opening
+ * it again from the history does not delete the settings a second time.
+ */
+function astro_sb_delete_options_prefixed( $prefix ) {
+	global $wpdb;
+
+	// esc_like() neutralizza _ e % nel prefisso; prepare() si occupa del resto.
+	$like = $wpdb->esc_like( $prefix ) . '%';
+
+	$option_names = $wpdb->get_col(
+		$wpdb->prepare( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s", $like )
+	);
+
+	// delete_option() e non una DELETE diretta: aggiorna anche la cache degli oggetti, altrimenti
+	// con una cache persistente le opzioni cancellate continuerebbero a essere lette.
+	$deleted = 0;
+	foreach ( $option_names as $option_name ) {
+		if ( delete_option( $option_name ) ) {
+			$deleted++;
+		}
+	}
+
+	return $deleted;
+}
+
+add_action( 'admin_post_astro_sb_delete_options', 'astro_sb_delete_options_action' );
+function astro_sb_delete_options_action() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'astro-sticky-buttons' ) );
+	}
+	check_admin_referer( 'astro_sb_delete_options' );
+
+	astro_sb_delete_options_prefixed( ASTRO_SB_PREFIX );
+
+	wp_safe_redirect( add_query_arg( array( 'page' => ASTRO_SB_TEXTDOMAIN, 'tab' => 'support', 'astro_sb_reset' => 'done' ), admin_url( 'admin.php' ) ) );
+	exit;
+}
+
+/**
+ * Tabs of the settings page.
+ */
+function astro_sb_tabs() {
+	return array( 'settings', 'layout', 'support' );
+}
+
+/**
  * Register options settings.
  */
 function astro_sb_register_settings() {
 
-    if (isset($_REQUEST['option_page']) && !empty($_REQUEST['option_page'])) {
+	// Only chooses which settings to register: options.php verifies the nonce before saving.
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$option_page = isset( $_REQUEST['option_page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['option_page'] ) ) : '';
 
-		if (strpos($_REQUEST['option_page'], ASTRO_SB_PREFIX) === 0) {
+	if ( $option_page !== '' ) {
 
-            $option_page = sanitize_text_field($_REQUEST['option_page']);
-            $tab = explode('_', $option_page);
-            $option_group = $option_page;
-            $option_names = astro_sb_option_names(end($tab));
-
-            if (!empty($option_names)) {
-
-                foreach ($option_names as $option_name) {
-                    $arr = array();
-                    if (strpos($option_name, '_options')) {
-                        $arr = array('type' => 'array');
-                    }
-                    register_setting( $option_group, $option_name, array($arr) );
-                }
-
-            }
-
+		if ( strpos( $option_page, ASTRO_SB_PREFIX ) === 0 ) {
+			$tab = explode( '_', $option_page );
+			astro_sb_register_tab_settings( $option_page, end( $tab ) );
 		}
 
-	}else{
-		$tab = 'settings';
-		$option_group = ASTRO_SB_PREFIX . '_' . $tab;
-		$option_names = astro_sb_option_names($tab);
-
-		if (!empty($option_names)) {
-			foreach ($option_names as $option_name) {
-				$arr = array();
-				if (strpos($option_name, '_options')) {
-					$arr = array('type' => 'array');
-				}
-				register_setting($option_group, $option_name, array($arr));
-			}
+	} else {
+		foreach ( array( 'settings', 'layout' ) as $tab ) {
+			astro_sb_register_tab_settings( ASTRO_SB_PREFIX . $tab, $tab );
 		}
-
-		$tab = 'layout';
-		$option_group = ASTRO_SB_PREFIX . '_' . $tab;
-		$option_names = astro_sb_option_names($tab);
-
-		if (!empty($option_names)) {
-
-            foreach ($option_names as $option_name) {
-                $arr = array();
-                if (strpos($option_name, '_options')) {
-                    $arr = array('type' => 'array');
-                }
-                register_setting( $option_group, $option_name, array($arr) );
-            }
-
-		}
-    }
+	}
 
 }
 add_action( 'admin_init', 'astro_sb_register_settings' );
@@ -146,24 +139,18 @@ function astro_sb_options() {
         <h1><?php echo esc_html(astro_sb_plugin_data('Name')); ?></h1>
         <?php
 
-        $tab  = 'settings'; // default panel
-        if (isset($_REQUEST['tab']) && !empty($_REQUEST['tab'])) {
-			$tab  = sanitize_text_field($_REQUEST['tab']);
-            // strpos() invece di str_contains(): quest'ultima e disponibile solo da
-            // WordPress 5.9 (polyfill) o PHP 8.0, mentre il plugin dichiara di supportare
-            // WordPress 5.2 con PHP 7.4. Gli argomenti restano nell'ordine originale per
-            // non alterare il comportamento esistente.
-            if (strpos('-', $tab) !== false) {
-				$tab = explode('-', $tab);
-				$tab = end($tab);
-			}
+        // Only the tabs of the plugin: the value is used to build the path of the included file.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- only chooses the tab to display.
+        $tab = isset( $_REQUEST['tab'] ) ? sanitize_key( wp_unslash( $_REQUEST['tab'] ) ) : '';
+        if ( ! in_array( $tab, astro_sb_tabs(), true ) ) {
+            $tab = 'settings'; // default panel
         }
 
 		astro_sb_tabs_nav($tab);
 
-        $tab_file = plugin_dir_path( __FILE__ ) . 'includes/tabs/tab-' . $tab .'.php';
-        if (file_exists($tab_file)) {
-			include( plugin_dir_path( __FILE__ ) . 'includes/tabs/tab-' . $tab .'.php' );
+        $tab_file = plugin_dir_path( __FILE__ ) . 'includes/tabs/tab-' . $tab . '.php';
+        if ( file_exists( $tab_file ) ) {
+			include $tab_file;
 		}
 
         ?>

@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if( ! is_admin() ) {
 	return;
 }
@@ -9,7 +13,7 @@ $astro_sb_prefix = esc_attr(ASTRO_SB_PREFIX);
 $tab = 'layout';
 $option_group = $astro_sb_prefix . $tab;
 ?>
-<div class="<?php echo $astro_sb_prefix . 'wrapper'; ?>  <?php echo esc_attr( $option_group ); ?>">
+<div class="<?php echo esc_attr( $astro_sb_prefix . 'wrapper' ); ?>  <?php echo esc_attr( $option_group ); ?>">
 
     <form method="post" action="options.php">
     <?php

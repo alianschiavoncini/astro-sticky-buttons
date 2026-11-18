@@ -80,17 +80,149 @@ function astro_sb_option_names($tab = false) {
 }
 
 /**
+ * Allowed values of the layout options shown as select boxes.
+ */
+function astro_sb_layout_choices( $option ) {
+	switch ( $option ) {
+		case 'position':
+			return array( 'align-right', 'align-right-bottom', 'align-bottom', 'align-left-bottom', 'align-left' );
+		case 'icon-border-style':
+			return array( 'none', 'dashed', 'dotted', 'double', 'groove', 'hidden', 'inset', 'outset', 'ridge', 'solid' );
+		case 'icon-box-shadow':
+			return array( 'no', 'yes' );
+	}
+	return array();
+}
+
+/**
+ * Return the sanitize callback of an option, from its name.
+ */
+function astro_sb_get_option_sanitize_callback( $option_name ) {
+	$name = substr( $option_name, strlen( ASTRO_SB_PREFIX ) );
+
+	if ( 0 === strpos( $name, 'enable_' ) ) {
+		return 'astro_sb_sanitize_checkbox';
+	}
+
+	switch ( $name ) {
+		case 'email':
+			return 'sanitize_email';
+		case 'position':
+		case 'icon-border-style':
+		case 'icon-box-shadow':
+			return 'astro_sb_sanitize_layout_choice_' . str_replace( '-', '_', $name );
+		case 'icon-margin-top':
+		case 'icon-margin-right':
+		case 'icon-margin-bottom':
+		case 'icon-margin-left':
+		case 'icon-padding':
+		case 'icon-width':
+		case 'icon-font-size':
+		case 'icon-border-width':
+		case 'icon-border-radius':
+			return 'astro_sb_sanitize_pixels';
+		case 'custom-css':
+			return 'astro_sb_sanitize_custom_css';
+	}
+
+	// Telephone, WhatsApp, Skype and the social account names.
+	return 'sanitize_text_field';
+}
+
+/**
+ * Checkbox: 1 when checked, empty otherwise.
+ */
+function astro_sb_sanitize_checkbox( $value ) {
+	return ( is_scalar( $value ) && '1' === (string) $value ) ? '1' : '';
+}
+
+/**
+ * Size in pixels: a non-negative integer, or empty to use the default value.
+ */
+function astro_sb_sanitize_pixels( $value ) {
+	if ( ! is_scalar( $value ) || ! is_numeric( $value ) ) {
+		return '';
+	}
+	return (string) absint( $value );
+}
+
+/**
+ * Select boxes of the layout: one of the values offered by the form, or empty.
+ */
+function astro_sb_sanitize_layout_choice( $option, $value ) {
+	return ( is_string( $value ) && in_array( $value, astro_sb_layout_choices( $option ), true ) ) ? $value : '';
+}
+
+function astro_sb_sanitize_layout_choice_position( $value ) {
+	return astro_sb_sanitize_layout_choice( 'position', $value );
+}
+
+function astro_sb_sanitize_layout_choice_icon_border_style( $value ) {
+	return astro_sb_sanitize_layout_choice( 'icon-border-style', $value );
+}
+
+function astro_sb_sanitize_layout_choice_icon_box_shadow( $value ) {
+	return astro_sb_sanitize_layout_choice( 'icon-box-shadow', $value );
+}
+
+/**
+ * Custom CSS: printed inside a <style> element, so HTML tags (such as </style>) are removed.
+ */
+function astro_sb_sanitize_custom_css( $value ) {
+	return is_string( $value ) ? wp_strip_all_tags( $value ) : '';
+}
+
+/**
+ * Custom CSS, when the settings are saved: only users allowed to edit the CSS of the site (the
+ * edit_css capability of the core Additional CSS) can change it. The others, such as the site
+ * administrators of a multisite network, keep the value already saved.
+ */
+function astro_sb_sanitize_custom_css_on_save( $value ) {
+	if ( ! current_user_can( 'edit_css' ) ) {
+		return astro_sb_sanitize_custom_css( get_option( ASTRO_SB_PREFIX . 'custom-css', '' ) );
+	}
+	return astro_sb_sanitize_custom_css( $value );
+}
+
+/**
+ * Read an option through its sanitize callback, so that values saved by the previous versions
+ * are checked too.
+ */
+function astro_sb_get_option( $option_name ) {
+	return call_user_func( astro_sb_get_option_sanitize_callback( $option_name ), get_option( $option_name ) );
+}
+
+/**
+ * Register the settings of a tab, each one with its sanitize callback.
+ */
+function astro_sb_register_tab_settings( $option_group, $tab ) {
+	$option_names = astro_sb_option_names( $tab );
+	if ( empty( $option_names ) ) {
+		return;
+	}
+
+	foreach ( $option_names as $option_name ) {
+		$sanitize_callback = astro_sb_get_option_sanitize_callback( $option_name );
+
+		// The custom CSS is checked against the capability of the user who saves it.
+		if ( 'astro_sb_sanitize_custom_css' === $sanitize_callback ) {
+			$sanitize_callback = 'astro_sb_sanitize_custom_css_on_save';
+		}
+
+		register_setting( $option_group, $option_name, array(
+			'type'              => 'string',
+			'sanitize_callback' => $sanitize_callback,
+		) );
+	}
+}
+
+/**
  * Unregister the option names if the plugin will delete.
  */
 register_uninstall_hook(__FILE__, 'astro_sb_unregister_option_names');
 function astro_sb_unregister_option_names() {
 	$tab = 'settings';
-	$option_group = ASTRO_SB_PREFIX . '_' . $tab;
-	$option_names = astro_sb_option_names($tab);
-
-	foreach ($option_names as $option_name) {
-		register_setting( $option_group, $option_name );
-	}
+	astro_sb_register_tab_settings( ASTRO_SB_PREFIX . '_' . $tab, $tab );
 }
 
 /**
@@ -118,7 +250,7 @@ function astro_sb_get_custom_layout() {
 
 	//Position
 	$position = array();
-	$position_element = get_option(ASTRO_SB_PREFIX.'position');
+	$position_element = astro_sb_get_option(ASTRO_SB_PREFIX.'position');
 	if (!empty($position_element)) {
 		$position[] = 'color:'.$position_element;
 	}
@@ -129,48 +261,48 @@ function astro_sb_get_custom_layout() {
 
 	//Icon
 	$icon = array();
-	$icon_margin_top = get_option(ASTRO_SB_PREFIX.'icon-margin-top');
+	$icon_margin_top = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-margin-top');
 	if ($icon_margin_top != '') {
 		$icon[] = 'margin-top:'.$icon_margin_top.'px';
 	}
-	$icon_margin_right = get_option(ASTRO_SB_PREFIX.'icon-margin-right');
+	$icon_margin_right = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-margin-right');
 	if ($icon_margin_right != '') {
 		$icon[] = 'margin-right:'.$icon_margin_right.'px';
 	}
-	$icon_margin_bottom = get_option(ASTRO_SB_PREFIX.'icon-margin-bottom');
+	$icon_margin_bottom = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-margin-bottom');
 	if ($icon_margin_bottom != '') {
 		$icon[] = 'margin-bottom:'.$icon_margin_bottom.'px';
 	}
-	$icon_margin_left = get_option(ASTRO_SB_PREFIX.'icon-margin-left');
+	$icon_margin_left = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-margin-left');
 	if ($icon_margin_left != '') {
 		$icon[] = 'margin-left:'.$icon_margin_left.'px';
 	}
-	$icon_padding = get_option(ASTRO_SB_PREFIX.'icon-padding');
+	$icon_padding = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-padding');
 	if ($icon_padding != '') {
 		$icon[] = 'padding:'.$icon_padding.'px';
 	}
-	$icon_width = get_option(ASTRO_SB_PREFIX.'icon-width');
+	$icon_width = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-width');
 	if ($icon_width != '') {
 		$icon[] = 'width:'.$icon_width.'px';
 		$icon[] = 'height:'.$icon_width.'px';
 	}
-	$icon_font_size = get_option(ASTRO_SB_PREFIX.'icon-font-size');
+	$icon_font_size = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-font-size');
 	if ($icon_font_size != '') {
 		$icon[] = 'font-size:'.$icon_font_size.'px';
 	}
-	$icon_border_width = get_option(ASTRO_SB_PREFIX.'icon-border-width');
+	$icon_border_width = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-border-width');
 	if ($icon_border_width != '') {
 		$icon[] = 'border-width:'.$icon_border_width.'px';
 	}
-	$icon_border_style = get_option(ASTRO_SB_PREFIX.'icon-border-style');
+	$icon_border_style = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-border-style');
 	if ($icon_border_style != '') {
 		$icon[] = 'border-style:'.$icon_border_style;
 	}
-	$icon_border_radius = get_option(ASTRO_SB_PREFIX.'icon-border-radius');
+	$icon_border_radius = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-border-radius');
 	if ($icon_border_radius != '') {
 		$icon[] = 'border-radius:'.$icon_border_radius.'px';
 	}
-	$icon_box_shadow = get_option(ASTRO_SB_PREFIX.'icon-box-shadow');
+	$icon_box_shadow = astro_sb_get_option(ASTRO_SB_PREFIX.'icon-box-shadow');
 	if ($icon_box_shadow == 'no') {
 		$icon[] = 'box-shadow:none';
 	}
@@ -179,7 +311,7 @@ function astro_sb_get_custom_layout() {
 		$arr[] = array('class' => '.astro_sb a', 'prop' => $icon);
 	}
 
-	$custom_css = get_option(ASTRO_SB_PREFIX.'custom-css');
+	$custom_css = astro_sb_get_option(ASTRO_SB_PREFIX.'custom-css');
 
 	$str = false;
 	if (!empty($arr) || !empty($custom_css)) {
@@ -224,7 +356,8 @@ function astro_sb_get_current_post_type() {
 	}
 
 	if ($enable) {
-		echo astro_sb_shortcode_output();
+		// The template escapes every value it prints.
+		echo astro_sb_shortcode_output(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}else{
 		return false;
 	}

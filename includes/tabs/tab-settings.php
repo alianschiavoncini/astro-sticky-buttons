@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if( ! is_admin() ) {
 	return;
 }
@@ -9,7 +13,7 @@ $astro_sb_prefix = esc_attr(ASTRO_SB_PREFIX);
 $tab = 'settings';
 $option_group = $astro_sb_prefix . $tab;
 ?>
-<div class="<?php echo $astro_sb_prefix . 'wrapper'; ?> <?php echo esc_attr( $option_group ); ?>">
+<div class="<?php echo esc_attr( $astro_sb_prefix . 'wrapper' ); ?> <?php echo esc_attr( $option_group ); ?>">
 
     <form method="post" action="options.php" class="<?php echo esc_attr($option_group); ?>_form">
         <?php
@@ -57,6 +61,7 @@ $option_group = $astro_sb_prefix . $tab;
 					foreach ( $post_types  as $post_type ) {
 						$post_type = get_post_type_object($post_type);
 
+						/* translators: %s: post type name. */
 						$field_label = sprintf( esc_html__( 'Display in %s', 'astro-sticky-buttons' ), $post_type->labels->name );
 						$field_description = '';
 						$field_name = $astro_sb_prefix.'enable_'.$post_type->name;
@@ -87,6 +92,7 @@ $option_group = $astro_sb_prefix . $tab;
 					foreach ( $taxonomies  as $taxonomy ) {
 						$taxonomy = get_taxonomy($taxonomy);
 
+						/* translators: %s: taxonomy name. */
 						$field_label = sprintf( esc_html__( 'Display in %s', 'astro-sticky-buttons' ), $taxonomy->labels->name );
 						$field_description = '';
 						$field_name = $astro_sb_prefix.'enable_'.$taxonomy->name;

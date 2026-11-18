@@ -3,7 +3,7 @@ Contributors: alian
 Tags: floating buttons, sticky buttons, email button, telephone button, whatsapp button
 Requires at least: 5.2
 Tested up to: 7.1
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,6 +47,16 @@ Display your favourite sticky buttons to get in touch with your visitors and sha
 gsphudo7by90lzwdlihyerqxbzj6jiln
 
 == Changelog ==
+= 1.4.2 =
+* Security: the settings are now sanitized when they are saved and when they are printed. The custom CSS and the layout values could close the style element and add scripts to every page of the site; on a multisite network, a site administrator could use it against the network administrator.
+* Security: only the users who can edit the CSS of the site (edit_css capability) can change the custom CSS.
+* Security: the "Remove all plugin settings" button now sends a POST request with a nonce instead of a link.
+* Security: the settings page accepts only its own tabs (settings, layout, support).
+* Security: the links of the sticky buttons open with rel="noopener noreferrer".
+* Fixed: the PHP files can no longer be opened directly.
+* Changed: the color picker of the settings page uses the scripts registered by WordPress, without the deprecated wpColorPickerL10n object.
+* Compatibility: tested with WordPress 7.1.
+
 = 1.4.1 =
 * Compatibility: tested with WordPress 7.1.
 
@@ -77,3 +87,7 @@ gsphudo7by90lzwdlihyerqxbzj6jiln
 
 = 1.0.0 =
 * Initial version
+
+== Upgrade Notice ==
+= 1.4.2 =
+Security release: the settings, including the custom CSS, are now sanitized, and only users with the edit_css capability can change the custom CSS. Update recommended.
