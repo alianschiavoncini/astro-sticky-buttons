@@ -217,18 +217,22 @@ function astro_sb_register_tab_settings( $option_group, $tab ) {
 }
 
 /**
- * Unregister the option names if the plugin will delete.
+ * Former uninstall callback: it did not delete the options, and it was registered from this file
+ * instead of the main plugin file, so WordPress never ran it. The plugin now uses uninstall.php.
+ *
+ * @deprecated 1.4.3 No replacement: uninstall.php deletes the options.
  */
-register_uninstall_hook(__FILE__, 'astro_sb_unregister_option_names');
 function astro_sb_unregister_option_names() {
-	$tab = 'settings';
-	astro_sb_register_tab_settings( ASTRO_SB_PREFIX . '_' . $tab, $tab );
+	_deprecated_function( __FUNCTION__, '1.4.3' );
 }
 
 /**
  * Return the Astro Sticky Buttons shortcode.
  */
 function astro_sb_shortcode_output() {
+
+	// The front-end files are enqueued only where the buttons are displayed.
+	astro_sb_enqueue_assets();
 
 	// Get the Template
 	$template_file = plugin_dir_path(__FILE__) . 'templates/astro-sticky-buttons.php';
@@ -325,18 +329,20 @@ function astro_sb_get_custom_layout() {
 }
 
 /**
- * Check the current page/post type.
+ * Whether the sticky buttons are displayed on the current page.
  */
-function astro_sb_get_current_post_type() {
-	global $post;
+function astro_sb_buttons_enabled() {
 
 	//Default value
 	$enable = false;
 
 	if ( is_singular() || is_single() || is_page() ) {
-		$option_value = get_option('astro_sb_enable_' . $post->post_type);
-		if ($option_value == 1) {
-			$enable = true;
+		$post_type = get_post_type();
+		if ( $post_type ) {
+			$option_value = get_option('astro_sb_enable_' . $post_type);
+			if ($option_value == 1) {
+				$enable = true;
+			}
 		}
 	}
 
@@ -355,7 +361,14 @@ function astro_sb_get_current_post_type() {
 		$enable = true;
 	}
 
-	if ($enable) {
+	return $enable;
+}
+
+/**
+ * Display the sticky buttons in the footer of the pages where they are enabled.
+ */
+function astro_sb_get_current_post_type() {
+	if ( astro_sb_buttons_enabled() ) {
 		// The template escapes every value it prints.
 		echo astro_sb_shortcode_output(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}else{

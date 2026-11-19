@@ -3,7 +3,7 @@ Contributors: alian
 Tags: floating buttons, sticky buttons, email button, telephone button, whatsapp button
 Requires at least: 5.2
 Tested up to: 7.1
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,6 +47,14 @@ Display your favourite sticky buttons to get in touch with your visitors and sha
 gsphudo7by90lzwdlihyerqxbzj6jiln
 
 == Changelog ==
+= 1.4.3 =
+* Fixed: deleting the plugin now removes all its settings, on every site of a multisite network. The previous uninstall callback was registered from the wrong file and never ran.
+* Fixed: with WP_DEBUG enabled, WordPress 6.7 and later no longer report that the plugin translations are loaded too early.
+* Changed: Font Awesome and the plugin styles are loaded only on the pages that display the sticky buttons or the [astro-sticky-buttons] shortcode, no longer on every page, in the admin area and on the login page.
+* Changed: removed the empty front-end script, which also loaded jQuery and jQuery UI Datepicker on every page.
+* Deprecated: astro_sb_check_plugin_version() and astro_sb_unregister_option_names() no longer do anything and will be removed in a future major version.
+* Compatibility: tested with WordPress 7.1.
+
 = 1.4.2 =
 * Security: the settings are now sanitized when they are saved and when they are printed. The custom CSS and the layout values could close the style element and add scripts to every page of the site; on a multisite network, a site administrator could use it against the network administrator.
 * Security: only the users who can edit the CSS of the site (edit_css capability) can change the custom CSS.
@@ -89,5 +97,8 @@ gsphudo7by90lzwdlihyerqxbzj6jiln
 * Initial version
 
 == Upgrade Notice ==
+= 1.4.3 =
+Includes the security fixes of 1.4.2: the settings, including the custom CSS, are sanitized, and only users with the edit_css capability can change the custom CSS. Deleting the plugin now removes its settings. Update recommended.
+
 = 1.4.2 =
 Security release: the settings, including the custom CSS, are now sanitized, and only users with the edit_css capability can change the custom CSS. Update recommended.

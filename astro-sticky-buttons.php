@@ -3,7 +3,7 @@
  * Plugin Name:       Astro Sticky Buttons
  * Plugin URI:        https://wordpress.org/plugins/astro-sticky-buttons
  * Description:       Display your favourite sticky buttons to get in touch with your visitors and share your social channels.
- * Version:           1.4.2
+ * Version:           1.4.3
  * Requires at least: 5.2
  * Requires PHP:      7.4
  * Author:            Alian Schiavoncini
@@ -35,9 +35,9 @@ if ( is_admin() ) {
 /**
  * Plugin constants.
  */
-define('ASTRO_SB_VERSION', '1.4.2');
+define('ASTRO_SB_VERSION', '1.4.3');
 define('ASTRO_SB_PREFIX', 'astro_sb_');
-define('ASTRO_SB_TEXTDOMAIN', astro_sb_plugin_data('TextDomain'));
+define('ASTRO_SB_TEXTDOMAIN', 'astro-sticky-buttons');
 
 /**
  * Loading Text Domain.F
@@ -48,10 +48,27 @@ function astro_sb_load_textdomain() {
 }
 
 /**
- * Enqueue plugin files.
+ * Enqueue the front-end files, only on the pages that display the sticky buttons.
+ * The [astro-sticky-buttons] shortcode enqueues them too, wherever it is used.
  */
-add_action('init', 'astro_sb_enqueue_files');
+add_action('wp_enqueue_scripts', 'astro_sb_enqueue_files');
 function astro_sb_enqueue_files() {
+	if ( astro_sb_buttons_enabled() ) {
+		astro_sb_enqueue_assets();
+	}
+}
+
+/**
+ * Enqueue Font Awesome and the plugin styles, with the custom layout CSS.
+ * When called after wp_head (shortcode in the content, buttons in the footer) WordPress prints
+ * the styles in the footer.
+ */
+function astro_sb_enqueue_assets() {
+
+	// Already enqueued: the inline CSS must not be added twice.
+	if ( wp_style_is( 'astro-sticky-buttons', 'enqueued' ) ) {
+		return;
+	}
 
 	$plugin_version = ASTRO_SB_VERSION;
 
@@ -66,7 +83,6 @@ function astro_sb_enqueue_files() {
 	// Enqueue main files
 	wp_register_style( 'astro-sticky-buttons', plugin_dir_url( __FILE__ ) . 'css/astro-sticky-buttons.css', array(), $plugin_version );
 	wp_enqueue_style( 'astro-sticky-buttons' );
-	wp_enqueue_script( 'astro-sticky-buttons', plugin_dir_url( __FILE__ ) . 'js/astro-sticky-buttons.js', array( 'jquery', 'jquery-ui-datepicker' ), $plugin_version );
 
 	// Add custom CSS
 	$custom_css = astro_sb_get_custom_layout();
@@ -91,17 +107,11 @@ function astro_sb_add_plugin_page_settings_link( $links ) {
 }
 
 /**
- * Activation check.
+ * Activation check of the versions before 1.0.2: it no longer runs, since the version compared
+ * is the current one.
+ *
+ * @deprecated 1.4.3 No replacement.
  */
-register_activation_hook( __FILE__, 'astro_sb_check_plugin_version' );
 function astro_sb_check_plugin_version() {
-	$plugin_version = ASTRO_SB_VERSION;
-	if ($plugin_version < '1.0.2') {
-		if (!isset($astro_sb_enable_all)) {
-			add_option('astro_sb_enable_post', 1);
-			add_option('astro_sb_enable_page', 1);
-			add_option('astro_sb_enable_attachment', 1);
-			return true;
-		}
-	}
+	_deprecated_function( __FUNCTION__, '1.4.3' );
 }
